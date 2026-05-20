@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-100 font-sans min-h-screen antialiased selection:bg-farm-500 selection:text-white overflow-x-hidden;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(22, 163, 74, 0.15) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(15, 23, 42, 0.95) 0px, rgba(15, 23, 42, 0.98) 100%),
+      radial-gradient(at 100% 100%, rgba(21, 128, 61, 0.15) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Panel */
+  .glass-panel {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800/60 shadow-glass rounded-2xl;
+  }
+
+  /* Premium Glassmorphism Card */
+  .glass-card {
+    @apply bg-slate-950/40 backdrop-blur-md border border-white/5 shadow-glass rounded-2xl transition-all duration-300;
+  }
+  
+  .glass-card-hover {
+    @apply hover:border-farm-500/30 hover:bg-slate-950/60 hover:shadow-glass-active hover:-translate-y-1;
+  }
+
+  /* Glass Inputs */
+  .glass-input {
+    @apply bg-slate-950/50 border border-slate-800/80 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 outline-none transition-all duration-200 focus:border-farm-500 focus:ring-1 focus:ring-farm-500/30;
+  }
+
+  /* Glass Button Primary */
+  .glass-btn-primary {
+    @apply bg-farm-600 hover:bg-farm-500 text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-200 shadow-md shadow-farm-600/20 hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0 cursor-pointer;
+  }
+
+  /* Glass Button Secondary */
+  .glass-btn-secondary {
+    @apply bg-slate-800/60 hover:bg-slate-700/60 border border-slate-700/50 text-slate-200 font-medium px-5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer;
+  }
+
+  /* Mini status badges */
+  .status-badge {
+    @apply text-xs font-semibold px-2.5 py-1 rounded-full border shadow-sm inline-flex items-center gap-1.5;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 197, 94, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 197, 94, 0.6);
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Custom chart wrapper */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
