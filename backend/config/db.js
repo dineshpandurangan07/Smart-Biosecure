@@ -1,15 +1,32 @@
 import mongoose from 'mongoose';
 
 const connectDB = async () => {
-  const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/biosecure_farm';
+  const uri = process.env.MONGO_URI;
+
+  if (!uri) {
+    console.warn('WARNING: MONGO_URI environment variable is not defined!');
+    if (process.env.VERCEL) {
+      console.error('Vercel serverless environment detected. You MUST configure MONGO_URI in your Vercel Project Settings -> Environment Variables.');
+      return;
+    }
+  }
+
+  const connectionUri = uri || 'mongodb://localhost:27017/biosecure_farm';
+
   try {
-    const isLocalhost = uri.includes('localhost') || uri.includes('127.0.0.1');
+    const isLocalhost = connectionUri.includes('localhost') || connectionUri.includes('127.0.0.1');
     const options = isLocalhost ? { serverSelectionTimeoutMS: 2000 } : {};
     
-    const conn = await mongoose.connect(uri, options);
+    const conn = await mongoose.connect(connectionUri, options);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.log(`Could not connect to standard database: ${error.message}`);
+    console.error(`Could not connect to standard database: ${error.message}`);
+    
+    if (process.env.VERCEL) {
+      console.error('Vercel serverless environment detected. Cannot fallback to In-Memory MongoDB Server on Vercel. Please verify your MONGO_URI environment variable and database IP whitelist/firewall settings.');
+      return;
+    }
+
     console.log('Attempting to launch an In-Memory MongoDB Server for presentation/demo mode...');
     try {
       const { MongoMemoryServer } = await import('mongodb-memory-server');
@@ -25,7 +42,9 @@ const connectDB = async () => {
       console.log('In-Memory Database Seeded successfully!');
     } catch (innerError) {
       console.error(`Failed to launch In-Memory MongoDB Server: ${innerError.message}`);
-      process.exit(1);
+      if (!process.env.VERCEL) {
+        process.exit(1);
+      }
     }
   }
 };
