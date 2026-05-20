@@ -4,6 +4,7 @@ node_modules/
 # Production builds
 dist/
 build/
+dist-ssr/
 .system_generated/
 
 # Environments and Secrets
@@ -12,13 +13,27 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+*.local
 
 # Logs and databases
 *.log
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
