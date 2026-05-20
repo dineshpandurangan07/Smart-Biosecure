@@ -1,3 +1,4 @@
+import User from '../models/User.js';
 import Visitor from '../models/Visitor.js';
 
 // @desc    Get all visitor logs

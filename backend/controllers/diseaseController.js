@@ -1,3 +1,4 @@
+import User from '../models/User.js';
 import Disease from '../models/Disease.js';
 import Notification from '../models/Notification.js';
 

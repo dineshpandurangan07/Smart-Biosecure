@@ -1,3 +1,4 @@
+import User from '../models/User.js';
 import Animal from '../models/Animal.js';
 import Visitor from '../models/Visitor.js';
 import FeedManagement from '../models/FeedManagement.js';

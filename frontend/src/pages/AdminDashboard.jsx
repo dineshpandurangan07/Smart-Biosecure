@@ -79,6 +79,30 @@ const AdminDashboard = () => {
     setLoading(false);
   };
 
+  if (errorMsg && !dashboardData) {
+    return (
+      <div className="min-h-[80vh] flex flex-col items-center justify-center p-6 text-center">
+        <div className="glass-card max-w-md p-8 border border-red-500/20 bg-red-950/10 rounded-2xl flex flex-col items-center gap-4">
+          <AlertOctagon className="w-16 h-16 text-red-500 animate-bounce" />
+          <h2 className="text-xl font-bold text-white font-sans">Connection Failure</h2>
+          <p className="text-sm text-slate-300">
+            We encountered an issue fetching biosecurity telemetry from the core server.
+          </p>
+          <div className="w-full text-xs bg-slate-950/60 p-3 rounded-lg font-mono text-red-400/90 text-left border border-white/5 break-all">
+            {errorMsg}
+          </div>
+          <button
+            onClick={handleRefresh}
+            className="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>Retry Connection</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (loading || !dashboardData) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center">
