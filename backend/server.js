@@ -53,15 +53,15 @@ app.use(async (req, res, next) => {
 });
 
 // Map Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/animals', animalRoutes);
-app.use('/api/vaccinations', vaccinationRoutes);
-app.use('/api/visitors', visitorRoutes);
-app.use('/api/diseases', diseaseRoutes);
-app.use('/api/feed', feedRoutes);
-app.use('/api/sanitation', sanitationRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/analytics', analyticsRoutes);
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/animals', '/animals'], animalRoutes);
+app.use(['/api/vaccinations', '/vaccinations'], vaccinationRoutes);
+app.use(['/api/visitors', '/visitors'], visitorRoutes);
+app.use(['/api/diseases', '/diseases'], diseaseRoutes);
+app.use(['/api/feed', '/feed'], feedRoutes);
+app.use(['/api/sanitation', '/sanitation'], sanitationRoutes);
+app.use(['/api/notifications', '/notifications'], notificationRoutes);
+app.use(['/api/analytics', '/analytics'], analyticsRoutes);
 
 // Error Handling Middleware
 app.use((req, res, next) => {
