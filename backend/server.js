@@ -19,7 +19,7 @@ import analyticsRoutes from './routes/analyticsRoutes.js';
 dotenv.config();
 
 // Connect to MongoDB
-connectDB();
+// Connection is handled securely in the middleware per-request to prevent serverless boot crashes
 
 const app = express();
 
